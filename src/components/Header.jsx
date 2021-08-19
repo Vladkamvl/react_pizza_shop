@@ -1,7 +1,7 @@
 import React from 'react';
 
 import logoSvg from "../assets/img/pizza-logo.svg";
-import Button from "./UI/Button";
+import HeaderButton from "./UI/HeaderButton";
 
 function Header(){
     return (
@@ -15,7 +15,7 @@ function Header(){
                     </div>
                 </div>
                 <div className="header__cart">
-                    <Button totalPrice={555} totalCount={5}/>
+                    <HeaderButton totalPrice={555} totalCount={5} outline/>
                 </div>
             </div>
         </div>

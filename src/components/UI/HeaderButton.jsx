@@ -1,9 +1,12 @@
 import React from 'react';
+import classNames from "classnames";
 
-function Button(props){
+function HeaderButton({totalPrice, totalCount}){
     return (
-        <a href="/cart.html" className="button button--cart">
-        <span>{props.totalPrice} ₽</span>
+        <a href="#"
+           className={classNames('button', 'button--cart')}
+        >
+        <span>{totalPrice} ₽</span>
         <div className="button__delimiter"></div>
         <svg
             width="18"
@@ -34,9 +37,9 @@ function Button(props){
                 strokeLinejoin="round"
             />
         </svg>
-        <span>{props.totalCount}</span>
+        <span>{totalCount}</span>
     </a>
     );
 }
 
-export default Button;
+export default HeaderButton;
