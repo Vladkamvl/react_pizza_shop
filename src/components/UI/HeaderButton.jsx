@@ -1,9 +1,10 @@
 import React from 'react';
 import classNames from "classnames";
+import {Link} from "react-router-dom";
 
 function HeaderButton({totalPrice, totalCount}){
     return (
-        <a href="#"
+        <Link to={"/cart"}
            className={classNames('button', 'button--cart')}
         >
         <span>{totalPrice} ₽</span>
@@ -38,7 +39,7 @@ function HeaderButton({totalPrice, totalCount}){
             />
         </svg>
         <span>{totalCount}</span>
-    </a>
+    </Link>
     );
 }
 
