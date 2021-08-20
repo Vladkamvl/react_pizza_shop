@@ -8,6 +8,13 @@
 
     svg {
       margin-right: 8px;
+      transition: transform 300ms ease;
+
+      &.rotated{
+        transform: rotate(180deg);
+        transition: transform 300ms ease;
+      }
+
     }
 
     b {
@@ -19,6 +26,7 @@
       border-bottom: 1px dashed $orange;
       cursor: pointer;
     }
+
   }
 
   &__popup {

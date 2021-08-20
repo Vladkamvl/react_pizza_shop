@@ -6,14 +6,11 @@ export default function SortPopup({ items }){
     const [selectedFilter, setSelectedFilter] = React.useState(items[0]);
 
     const sortRef = React.useRef(null);
-
     const changeVisible = () => {
         setVisiblePopup(!visiblePopup);
     };
 
     const handleOutsideClick = (e) => {
-        console.log(e.target);
-        console.log(sortRef.current);
        if(!sortRef.current.contains(e.target)){
            setVisiblePopup(false);
        }
@@ -27,12 +24,13 @@ export default function SortPopup({ items }){
         };
     });
 
-
-
     return (
         <div ref={sortRef} className="sort">
             <div className="sort__label" onClick={changeVisible}>
                 <svg
+                    className={classNames({
+                        'rotated': visiblePopup === true,
+                    })}
                     width="10"
                     height="6"
                     viewBox="0 0 10 6"
