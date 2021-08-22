@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from "classnames";
 
-export default function PizzaItemButton({title, isActive, onClick, isDisabled}){
+export default function PizzaItemButton({children, isActive, onClick, isDisabled}){
     return (
         <li
             className={classNames({
@@ -10,7 +10,7 @@ export default function PizzaItemButton({title, isActive, onClick, isDisabled}){
             })}
             onClick={onClick}
         >
-            {title}
+            {children}
         </li>
     );
 }

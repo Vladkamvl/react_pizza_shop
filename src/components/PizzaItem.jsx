@@ -1,6 +1,6 @@
 import React from 'react';
 import PizzaItemButton from "./UI/PizzaItemButton";
-import classNames from "classnames";
+import * as PropTypes from "prop-types";
 
 export default function PizzaItem({name, sizes, price, imageUrl, types}){
     const typeNames = [
@@ -32,13 +32,14 @@ export default function PizzaItem({name, sizes, price, imageUrl, types}){
                             return (
                                 <PizzaItemButton
                                     key={type}
-                                    title={type}
                                     isActive={activeType === index}
                                     isDisabled={!types.includes(index) && activeType !== index}
                                     onClick={() => {
                                         onSelectType(index)
                                     }}
-                                />
+                                >
+                                    {type}
+                                </PizzaItemButton>
                             );
                         })
                     }
@@ -54,7 +55,9 @@ export default function PizzaItem({name, sizes, price, imageUrl, types}){
                                     onClick={() => {
                                         onSelectSize(size)
                                     }}
-                                />
+                                >
+                                    {size} см.
+                                </PizzaItemButton>
                             );
                         })
                     }
@@ -81,4 +84,18 @@ export default function PizzaItem({name, sizes, price, imageUrl, types}){
             </div>
         </div>
     );
+}
+
+PizzaItem.propTypes = {
+    name: PropTypes.string.isRequired,
+    sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
+    price: PropTypes.number,
+    imageUrl: PropTypes.string.isRequired,
+    types: PropTypes.arrayOf(PropTypes.number).isRequired,
+};
+PizzaItem.defaultProps = {
+    name: '-',
+    size: [],
+    types: [],
+    price: 0,
 }
