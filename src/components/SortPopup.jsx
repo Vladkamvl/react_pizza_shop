@@ -9,7 +9,10 @@ export default function SortPopup({ items }){
     const changeVisible = () => {
         setVisiblePopup(!visiblePopup);
     };
-
+    const onSelectFilter = (item) => {
+        setSelectedFilter(item);
+        changeVisible()
+    };
     const handleOutsideClick = (e) => {
        if(sortRef.current && !sortRef.current.contains(e.target)){
            setVisiblePopup(false);
@@ -43,27 +46,25 @@ export default function SortPopup({ items }){
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span>{selectedFilter}</span>
+                <span>{selectedFilter.name}</span>
             </div>
             { visiblePopup &&
                 <div className="sort__popup">
                     <ul>
                         {
                             items.map((item, index) => {
-                                let itemId = `${items[0]}_${index}`;
-                                const selectFilter = () => {
-                                    setSelectedFilter(item);
-                                    changeVisible()
-                                };
+                                let itemId = `${items[0].name}_${index}`;
                                 return (
                                     <li
                                         className={classNames({
-                                            'active': selectedFilter === item,
+                                            'active': selectedFilter.type === item.type,
                                         })}
                                         key={itemId}
-                                        onClick={selectFilter}
+                                        onClick={() => {
+                                            onSelectFilter(item)
+                                        }}
                                     >
-                                        {item}
+                                        {item.name}
                                     </li>
                                 );
                             })
