@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from "classnames";
 
-export default function SortPopup({ items }){
+const SortPopup = React.memo(function SortPopup({ items }){
     const [visiblePopup, setVisiblePopup] = React.useState(false);
     const [selectedFilter, setSelectedFilter] = React.useState(items[0]);
 
@@ -14,9 +14,9 @@ export default function SortPopup({ items }){
         changeVisible()
     };
     const handleOutsideClick = (e) => {
-       if(sortRef.current && !sortRef.current.contains(e.target)){
-           setVisiblePopup(false);
-       }
+        if(sortRef.current && !sortRef.current.contains(e.target)){
+            setVisiblePopup(false);
+        }
     };
 
     React.useEffect(() => {
@@ -49,29 +49,31 @@ export default function SortPopup({ items }){
                 <span>{selectedFilter.name}</span>
             </div>
             { visiblePopup &&
-                <div className="sort__popup">
-                    <ul>
-                        {
-                            items.map((item, index) => {
-                                let itemId = `${items[0].name}_${index}`;
-                                return (
-                                    <li
-                                        className={classNames({
-                                            'active': selectedFilter.type === item.type,
-                                        })}
-                                        key={itemId}
-                                        onClick={() => {
-                                            onSelectFilter(item)
-                                        }}
-                                    >
-                                        {item.name}
-                                    </li>
-                                );
-                            })
-                        }
-                    </ul>
-                </div>
+            <div className="sort__popup">
+                <ul>
+                    {
+                        items.map((item, index) => {
+                            let itemId = `${items[0].name}_${index}`;
+                            return (
+                                <li
+                                    className={classNames({
+                                        'active': selectedFilter.type === item.type,
+                                    })}
+                                    key={itemId}
+                                    onClick={() => {
+                                        onSelectFilter(item)
+                                    }}
+                                >
+                                    {item.name}
+                                </li>
+                            );
+                        })
+                    }
+                </ul>
+            </div>
             }
         </div>
     );
-}
+});
+
+export default SortPopup;
