@@ -1,5 +1,5 @@
 import React from 'react';
-import PizzaItemButton from "./UI/PizzaItemButton";
+import PizzaItemButton from "../UI/PizzaItemButton";
 import * as PropTypes from "prop-types";
 
 export default function PizzaItem({name, sizes, price, imageUrl, types}){
