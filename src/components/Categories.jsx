@@ -20,7 +20,19 @@ const Categories = React.memo(({ activeCategory, categories, onClickCategory }) 
     });
     return (
         <div className="categories">
+
             <ul>
+                <CategoryButton
+                    key={'0'}
+                    onClick={() => {
+                        onClickCategory(null)
+                    }}
+                    className={classNames({
+                        'active': activeCategory === null,
+                    })}
+                >
+                    Все
+                </CategoryButton>
                 {categoriesButtonsList}
             </ul>
         </div>

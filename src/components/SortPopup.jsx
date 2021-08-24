@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from "classnames";
 import {useDispatch} from "react-redux";
-import {setSortBy} from "../redux/actions/filters";
+import * as PropTypes from "prop-types";
 
 const SortPopup = React.memo(function SortPopup({ activeSortType, sortItems, onClickSortType }){
     const dispatch = useDispatch();
@@ -80,5 +80,11 @@ const SortPopup = React.memo(function SortPopup({ activeSortType, sortItems, onC
         </div>
     );
 });
+
+SortPopup.propTypes = {
+    activeSortType: PropTypes.string.isRequired,
+    sortItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onClickSortType: PropTypes.func.isRequired,
+}
 
 export default SortPopup;

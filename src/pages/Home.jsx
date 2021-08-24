@@ -2,10 +2,9 @@ import React from 'react';
 import {Categories, SortPopup, PizzaItem, LoadingPizzaItem} from "../components";
 import {useDispatch, useSelector} from "react-redux";
 import {setCategory, setSortBy} from "../redux/actions/filters";
-import {fetchPizzas} from "../redux/actions/pizzas";
+import {fetchFilteredByCategoryPizzas, fetchPizzas} from "../redux/actions/pizzas";
 
 const categoryNames = [
-    'Все',
     'Мясные',
     'Вегетарианская',
     'Гриль',
@@ -16,7 +15,7 @@ const categoryNames = [
 const sortItems = [
     {
         name: 'популярности',
-        type: 'popular',
+        type: 'rating',
     },
     {
         name: 'цене',
@@ -53,9 +52,8 @@ export default function Home(){
     }, [dispatch]);
 
     React.useEffect(() => {
-        dispatch(setCategory(0));
-        dispatch(fetchPizzas());
-    }, []);
+        dispatch(fetchPizzas(sortBy, category));
+    }, [sortBy, category]);
 
     return (
         <div className="content">
