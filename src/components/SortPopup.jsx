@@ -1,18 +1,24 @@
 import React from 'react';
 import classNames from "classnames";
+import {useDispatch} from "react-redux";
+import {setSortBy} from "../redux/actions/filters";
 
-const SortPopup = React.memo(function SortPopup({ items }){
+const SortPopup = React.memo(function SortPopup({ activeSortType, sortItems, onClickSortType }){
+    const dispatch = useDispatch();
+
     const [visiblePopup, setVisiblePopup] = React.useState(false);
-    const [selectedFilter, setSelectedFilter] = React.useState(items[0]);
 
     const sortRef = React.useRef(null);
+
     const changeVisible = () => {
         setVisiblePopup(!visiblePopup);
     };
-    const onSelectFilter = (item) => {
-        setSelectedFilter(item);
-        changeVisible()
+
+    const onSelectFilter = (sortType) => {
+        onClickSortType(sortType);
+        changeVisible();
     };
+
     const handleOutsideClick = (e) => {
         if(sortRef.current && !sortRef.current.contains(e.target)){
             setVisiblePopup(false);
@@ -46,25 +52,24 @@ const SortPopup = React.memo(function SortPopup({ items }){
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span>{selectedFilter.name}</span>
+                <span>{sortItems.find((sortItem) => sortItem.type === activeSortType).name}</span>
             </div>
             { visiblePopup &&
             <div className="sort__popup">
                 <ul>
                     {
-                        items.map((item, index) => {
-                            let itemId = `${items[0].name}_${index}`;
+                        sortItems.map((sortItem, index) => {
                             return (
                                 <li
                                     className={classNames({
-                                        'active': selectedFilter.type === item.type,
+                                        'active': activeSortType === sortItem.type,
                                     })}
-                                    key={itemId}
+                                    key={`${sortItem.name}_${index}`}
                                     onClick={() => {
-                                        onSelectFilter(item)
+                                        onSelectFilter(sortItem.type)
                                     }}
                                 >
-                                    {item.name}
+                                    {sortItem.name}
                                 </li>
                             );
                         })

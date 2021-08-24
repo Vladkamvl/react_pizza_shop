@@ -1,27 +1,21 @@
 import React from 'react';
 import CategoryButton from "./UI/CategoryButton";
 import classNames from "classnames";
+import * as PropTypes from "prop-types";
 
-const Categories = React.memo(({ items, onClickItem }) => {
-    const [activeId, setActiveId] = React.useState(`${items[0]}_0`);
+const Categories = React.memo(({ activeCategory, categories, onClickCategory }) => {
 
-    const onSelectItem = (itemId) => {
-        setActiveId(itemId);
-        onClickItem(itemId);
-    }
-
-    const categoriesButtonsList= items.map((item, index)=> {
-        let itemId = `${item}_${index}`
+    const categoriesButtonsList= categories.map((category, index)=> {
         return (<CategoryButton
-            key={itemId}
+            key={`${category}_${index}`}
             onClick={() => {
-                onSelectItem(itemId)
+                onClickCategory(index)
             }}
             className={classNames({
-                'active': activeId === itemId,
+                'active': activeCategory === index,
             })}
         >
-            {item}
+            {category}
         </CategoryButton>);
     });
     return (
@@ -32,5 +26,16 @@ const Categories = React.memo(({ items, onClickItem }) => {
         </div>
     );
 });
+
+Categories.propTypes = {
+    activeCategory: PropTypes.number,
+    items: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onClickCategory: PropTypes.func.isRequired,
+};
+
+Categories.defaultProps = {
+    activeCategory: null,
+    items: [],
+}
 
 export default Categories;
