@@ -1,9 +1,8 @@
 import React from 'react';
-import {Categories, SortPopup, PizzaItem} from "../components";
+import {Categories, SortPopup, PizzaItem, LoadingPizzaItem} from "../components";
 import {useDispatch, useSelector} from "react-redux";
 import {setCategory} from "../redux/actions/filters";
 import {fetchPizzas} from "../redux/actions/pizzas";
-import LoadingPizzaItem from "../components/PizzaItem/LoadingPizzaItem";
 
 const categoryNames = [
     'Все',
@@ -66,8 +65,8 @@ export default function Home(){
                     {isLoaded ?
                         items.map(item => {
                             return (<PizzaItem
-                                    key={item.id}
-                                    {...item}
+                                key={item.id}
+                                {...item}
                             />);
                         })
                         : Array(12)
