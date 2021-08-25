@@ -1,10 +1,8 @@
 import React from 'react';
 import classNames from "classnames";
-import {useDispatch} from "react-redux";
 import * as PropTypes from "prop-types";
 
 const SortPopup = React.memo(function SortPopup({ activeSortType, sortItems, onClickSortType }){
-    const dispatch = useDispatch();
 
     const [visiblePopup, setVisiblePopup] = React.useState(false);
 
