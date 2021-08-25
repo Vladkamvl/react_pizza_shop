@@ -1,11 +1,19 @@
 import React from 'react';
 import PizzaItemButton from "../UI/PizzaItemButton";
 import * as PropTypes from "prop-types";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addToCart} from "../../redux/actions/cart";
 
 export default function PizzaItem({id, name, sizes, price, imageUrl, types}){
     const dispatch = useDispatch();
+
+    const {count} = useSelector(({cart}) => {
+        let count = 0;
+        cart.items.filter( item => item.id === id ).forEach(item => count += item.count);
+        return {
+            count: count,
+        }
+    });
 
     const typeNames = [
         'тонкое',
@@ -95,7 +103,7 @@ export default function PizzaItem({id, name, sizes, price, imageUrl, types}){
                         />
                     </svg>
                     <span>Добавить</span>
-                    <i>NONE</i>
+                    <i>{count}</i>
                 </div>
             </div>
         </div>

@@ -12,10 +12,8 @@ const cart = (state = initialState, action) => {
             let itemIndex = items.findIndex((item) => {
                 return item.id === action.payload.id
                 && item.size === action.payload.size
-                && item.type == action.payload.type
+                && item.type === action.payload.type
             });
-            console.log(itemIndex)
-
             if(itemIndex !== -1){
                 items[itemIndex].count = items[itemIndex].count  + 1;
             }else{
