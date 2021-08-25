@@ -22,6 +22,9 @@ const cart = (state = initialState, action) => {
                     count: 1,
                     size: action.payload.size,
                     type: action.payload.type,
+                    imageUrl: action.payload.imageUrl,
+                    name: action.payload.name,
+                    price: action.payload.price,
                 });
             }
 
@@ -30,6 +33,13 @@ const cart = (state = initialState, action) => {
                 items: items,
                 totalCount: state.totalCount + 1,
                 totalPrice: state.totalPrice + action.payload.price,
+            };
+        case 'CLEAR_CART':
+            return {
+                ...state,
+                items: [],
+                totalCount: 0,
+                totalPrice: 0,
             };
         default:
             return state;

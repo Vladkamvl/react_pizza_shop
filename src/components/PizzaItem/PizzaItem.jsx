@@ -36,6 +36,8 @@ export default function PizzaItem({id, name, sizes, price, imageUrl, types}){
                 price: price,
                 size: activeSize,
                 type: activeType,
+                name: name,
+                imageUrl: imageUrl,
             };
             dispatch(addToCart(payload));
         }, [dispatch, price, activeSize, activeType]);

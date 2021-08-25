@@ -30,9 +30,9 @@ const sortItems = [
 export default function Home(){
     const dispatch = useDispatch();
 
-    const {items, isLoaded} = useSelector(({pizzas}) => {
+    const {pizzas, isLoaded} = useSelector(({pizzas}) => {
         return {
-            items: pizzas.items,
+            pizzas: pizzas.items,
             isLoaded: pizzas.isLoaded,
         };
     });
@@ -70,10 +70,10 @@ export default function Home(){
                 <h2 className="content__title">Все пиццы</h2>
                 <div className="content__items">
                     {isLoaded ?
-                        items.map(item => {
+                        pizzas.map(pizza => {
                             return (<PizzaItem
-                                key={item.id}
-                                {...item}
+                                key={pizza.id}
+                                {...pizza}
                             />);
                         })
                         : Array(12)
