@@ -6,7 +6,7 @@ const typeNames = [
     'традиционное'
 ];
 
-export default function CartItem({name, size, totalPrice, imageUrl, type, count }){
+export default function CartItem({name, size, totalPrice, imageUrl, type, count, onClickPlus, onClickMinus, onClickRemove }){
 
     const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ export default function CartItem({name, size, totalPrice, imageUrl, type, count 
                 <p>{typeNames[type]}, {size} см.</p>
             </div>
             <div className="cart__item-count">
-                <div className="button button--outline button--circle cart__item-count-minus">
+                <div className="button button--outline button--circle cart__item-count-minus" onClick={onClickMinus}>
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -37,7 +37,7 @@ export default function CartItem({name, size, totalPrice, imageUrl, type, count 
 
                 </div>
                 <b>{count}</b>
-                <div className="button button--outline button--circle cart__item-count-plus">
+                <div className="button button--outline button--circle cart__item-count-plus" onClick={onClickPlus}>
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -53,8 +53,8 @@ export default function CartItem({name, size, totalPrice, imageUrl, type, count 
             <div className="cart__item-price">
                 <b>{totalPrice} ₽</b>
             </div>
-            <div className="cart__item-remove">
-                <div className="button button--outline button--circle">
+            <div className="cart__item-remove" >
+                <div className="button button--outline button--circle" onClick={onClickRemove}>
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path

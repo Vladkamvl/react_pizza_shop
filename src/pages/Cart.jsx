@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import CartItem from "../components/CartItem/CartItem";
-import {clearCart} from "../redux/actions/cart";
+import {addToCart, clearCart, minusFromCart, removeFromCart} from "../redux/actions/cart";
 
 export default function Cart(){
     const dispatch = useDispatch();
@@ -19,6 +19,31 @@ export default function Cart(){
         };
     });
 
+    const onClickMinus = (id, size, type) => {
+        dispatch(minusFromCart({
+            id: id,
+            size: size,
+            type: type,
+        }));
+    }
+
+    const addPizzaToCart = (id, size, type, price)=> {
+        const payload = {
+            id: id,
+            size: size,
+            type: type,
+            price: price,
+        };
+        dispatch(addToCart(payload));
+    };
+
+    const onClickRemoveFromCart = (id, size, type) => {
+      dispatch(removeFromCart({
+          id: id,
+          size: size,
+          type: type,
+      }));
+    };
     return (
         <div className="content">
             <div className="container container--cart">
@@ -65,6 +90,9 @@ export default function Cart(){
                                     imageUrl={pizza.imageUrl}
                                     type={pizza.type}
                                     size={pizza.size}
+                                    onClickPlus={() => addPizzaToCart(pizza.id, pizza.size, pizza.type, pizza.price)}
+                                    onClickMinus={() => onClickMinus(pizza.id, pizza.size, pizza.type)}
+                                    onClickRemove={()=> onClickRemoveFromCart(pizza.id, pizza.size, pizza.type)}
                                 />);
                             })
                         }
