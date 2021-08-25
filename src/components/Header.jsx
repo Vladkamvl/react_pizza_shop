@@ -3,8 +3,13 @@ import React from 'react';
 import logoSvg from "../assets/img/pizza-logo.svg";
 import HeaderButton from "./UI/HeaderButton";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 function Header(){
+    const {cartTotalPrice, cartTotalCount} = useSelector(({cart}) => ({
+        cartTotalPrice: cart.totalPrice,
+        cartTotalCount: cart.totalCount,
+    }));
     return (
         <div className="header">
             <div className="container">
@@ -16,7 +21,7 @@ function Header(){
                     </div>
                 </div>
                 <div className="header__cart">
-                    <HeaderButton totalPrice={555} totalCount={5} outline/>
+                    <HeaderButton totalPrice={cartTotalPrice} totalCount={cartTotalCount} outline/>
                 </div>
             </div>
         </div>

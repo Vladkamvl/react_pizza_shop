@@ -1,8 +1,12 @@
 import React from 'react';
 import PizzaItemButton from "../UI/PizzaItemButton";
 import * as PropTypes from "prop-types";
+import {useDispatch} from "react-redux";
+import {addToCart} from "../../redux/actions/cart";
 
-export default function PizzaItem({name, sizes, price, imageUrl, types}){
+export default function PizzaItem({id, name, sizes, price, imageUrl, types}){
+    const dispatch = useDispatch();
+
     const typeNames = [
         'тонкое',
         'традиционное'
@@ -17,6 +21,17 @@ export default function PizzaItem({name, sizes, price, imageUrl, types}){
     const onSelectType = (index) => {
         setActiveType(index);
     }
+
+    const addPizzaToCart = React.useCallback(()=> {
+            const payload = {
+                id: id,
+                price: price,
+                size: activeSize,
+                type: activeType,
+            };
+            dispatch(addToCart(payload));
+        }, [dispatch, price, activeSize, activeType]);
+
     return (
         <div className="pizza-block">
             <img
@@ -65,7 +80,8 @@ export default function PizzaItem({name, sizes, price, imageUrl, types}){
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽</div>
-                <div className="button button--outline button--add">
+                <div className="button button--outline button--add"
+                     onClick={addPizzaToCart}>
                     <svg
                         width="12"
                         height="12"
@@ -79,7 +95,7 @@ export default function PizzaItem({name, sizes, price, imageUrl, types}){
                         />
                     </svg>
                     <span>Добавить</span>
-                    <i>2</i>
+                    <i>NONE</i>
                 </div>
             </div>
         </div>
